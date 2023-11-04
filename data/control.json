@@ -1,0 +1,129 @@
+{
+    "sensors": {
+        "temperature": 0,
+        "humidity": 0,
+        "waterTankLevel": 0
+    },
+    "devices": [
+        {
+            "status": false,
+            "unit": "lightSource",
+            "rule": false,
+            "onWhen": {
+                "rule": 0,
+                "condition": 0,
+                "value": 0
+            },
+            "offWhen": {
+                "rule": 0,
+                "condition": 0,
+                "value": 0
+            },
+            "time": {
+                "HOUR": -1,
+                "MINUTES": -1,
+                "SECONDS": -1
+            }
+        },
+        {
+            "status": false,
+            "unit": "inputPump",
+            "rule": false,
+            "onWhen": {
+                "rule": 0,
+                "condition": 0,
+                "value": 0
+            },
+            "offWhen": {
+                "rule": 0,
+                "condition": 0,
+                "value": 0
+            },
+            "time": {
+                "HOUR": -1,
+                "MINUTES": -1,
+                "SECONDS": -1
+            }
+        },
+        {
+            "status": false,
+            "unit": "outputPump",
+            "rule": false,
+            "onWhen": {
+                "rule": 0,
+                "condition": 0,
+                "value": 0
+            },
+            "offWhen": {
+                "rule": 0,
+                "condition": 0,
+                "value": 0
+            },
+            "time": {
+                "HOUR": -1,
+                "MINUTES": -1,
+                "SECONDS": -1
+            }
+        },
+        {
+            "status": false,
+            "unit": "fanIntake",
+            "rule": false,
+            "onWhen": {
+                "rule": 0,
+                "condition": 0,
+                "value": 0
+            },
+            "offWhen": {
+                "rule": 0,
+                "condition": 0,
+                "value": 0
+            },
+            "time": {
+                "HOUR": -1,
+                "MINUTES": -1,
+                "SECONDS": -1
+            }
+        },
+        {
+            "status": false,
+            "unit": "fanExhaus",
+            "rule": false,
+            "onWhen": {
+                "rule": 0,
+                "condition": 0,
+                "value": 0
+            },
+            "offWhen": {
+                "rule": 0,
+                "condition": 0,
+                "value": 0
+            },
+            "time": {
+                "HOUR": -1,
+                "MINUTES": -1,
+                "SECONDS": -1
+            }
+        },
+        {
+            "status": false,
+            "unit": "oxygenPump",
+            "rule": false,
+            "onWhen": {
+                "rule": 0,
+                "condition": 0,
+                "value": 0
+            },
+            "offWhen": {
+                "rule": 0,
+                "condition": 0,
+                "value": 0
+            },
+            "time": {
+                "HOUR": -1,
+                "MINUTES": -1,
+                "SECONDS": -1
+            }
+        }
+    ]
+}

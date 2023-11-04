@@ -1,0 +1,16 @@
+{
+    "WIFI_STA_ENABLED": true,
+    "IS_CONFIRMED": false,
+    "INPUT_SSID": "A1_01QW2",
+    "INPUT_PASSWORD": "12345678",
+    "AP_IP": "192.168.4.20",
+    "STA_IP" : "",
+    "STA_SUBNETMASK": "255.255.255.0",
+    "AP_SUBNETMASK": "255.255.255.0",
+    "STA_GETEWAY": "192.168.100.1",
+    "AP_GETEWAY": "192.168.100.1",
+    "REFRESH_STATE": false,
+    "DATA_FILE_PATH": "/data/app.json",
+    "LOG_FILE_PATH": "/data/logs/logs.txt",
+    "FEATURES_DATA_FILE_PATH": "/data/features.json"
+}

@@ -1,0 +1,12 @@
+{
+    "total_users": 1,
+    "users":[
+        {
+            "id": 1,
+            "username": "gbx_user@gbx.com",
+            "userPassword": "!Aa12345678",
+            "passwordConfirmed": 0
+        }
+        
+    ]
+}
