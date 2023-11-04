@@ -63,6 +63,8 @@
 #include "server/handlers/identity/setup_account_request_handler.h"
 #include "server/handlers/identity/serve_setup_account_request_handler copy.h"
 
+#include "server/handlers/app/serve_app_main_request_handler.h"
+
 #include "server/routes.h"
 #include "utility/log/lab_logger.h"
 #include <WiFiClientSecure.h>
@@ -208,7 +210,12 @@ void WebAppServer::begin(fs::FS &fs)
 
 #pragma region STATIC_RESOURCES
 
-  server.serveStatic("/", SD, "/data/ui/").setDefaultFile("index.html");
+  server.serveStatic("index.html", SD, "/data/ui/index.html").setDefaultFile("index.html");
+  // server.serveStatic("style.css", SD, "/data/ui/style.css").setCacheControl("max-age=125000");
+  // server.serveStatic("scripts.js", SD, "/data/ui/scripts.js").setCacheControl("max-age=125000");
+  // server.serveStatic("runtime.js", SD, "/data/ui/runtime.js").setCacheControl("max-age=125000");
+  // server.serveStatic("polyfills.js", SD, "/data/ui/polyfills.js").setCacheControl("max-age=125000");
+ // server.serveStatic("main.js", SD, "/data/ui/main.js").setCacheControl("max-age=125000");
 
 #pragma endregion STATIC_RESOURCES
 
@@ -241,53 +248,55 @@ void WebAppServer::begin(fs::FS &fs)
         });
   }
 
-    server.addHandler(new CreateUserRequestHandler(this->logger));
-    server.addHandler(new LoginRequestHandler(this->app_jwt, this->rtc, this->logger));
-    server.addHandler(new SetupAccountRequestHandler(this->app_jwt, this->rtc, this->logger, this->app_config, this->app_config_mapper, this->app_ui_mapper));
-    server.addHandler(new ServeIndexRequestHandler(this->logger));
-    server.addHandler(new ServeSetupAccountRequestHandler(this->logger));
-    server.addHandler(new ServeAboutRequestHandler(this->logger));
-    server.addHandler(new ServeLoginRequestHandler(this->logger));
-    server.addHandler(new ServePrivacyRequestHandler(this->logger));
-    server.addHandler(new ServeUpdateRequestHandler(this->logger));
-    server.addHandler(new ServeControlRequestHandler(this->logger));
-    server.addHandler(new ServePrivacyRequestHandler(this->logger));
-    server.addHandler(new ServeTocRequestHandler(this->logger));
-    server.addHandler(new ServeControlRequestHandler(this->logger));
-    server.addHandler(new ServeDashboardRequestHandler(this->logger));
-    server.addHandler(new GetFansRequestHandler(this->logger));
-    server.addHandler(new GetHydroRequestHandler(this->logger));
-    server.addHandler(new GetLightsRequestHandler(this->logger));
-    server.addHandler(new ServeTelegramNoticifationsRequestHandler(this->logger));
-    server.addHandler(new ServeSettingsRequestHandler(this->logger));
-    server.addHandler(new ServeTemperatureRequestHandler(this->logger));
-    server.addHandler(new ServeUpdateRequestHandler(this->logger));
-    server.addHandler(new ServeCredentialsAppliedRequestHandler(this->logger));
-    server.addHandler(new RestartDeviceSettingsRequestHandler(this->logger, this->app_config));
-    server.addHandler(new DownloadFeatureRequestHandler(this->logger));
-    server.addHandler(new ShutDownDeviceSettingsRequestHandler(this->logger));
-    server.addHandler(new RestartDeviceStateRequestHandler(this->logger, this->app_control, this->app_config, this->app_config_mapper));
-    server.addHandler(new RestartCredentialsSettingsRequestHandler(this->app_config, this->app_config_mapper, this->logger));
-    server.addHandler(new ServeFeatureRequestHandler(this->app_config, this->app_control, this->app_feature_mapper, this->logger, this->action_feature));
-    server.addHandler(new GetControlDataRequestHandler(this->app_control, this->app_control_mapper, this->logger));
-    server.addHandler(new SetControlDataRequestHandler(fs, this->app_config, this->app_control, this->app_control_mapper, this->logger, this->rtc));
-    server.addHandler(new ServeLogsRequestHandler(this->logger));
-    server.addHandler(new GetLimitsRequestHandler(this->logger));
-    server.addHandler(new ServeChangeSuccessRequestHandler(this->logger));
-    server.addHandler(new ServeWaterTankRequestHandler(this->logger));
-    server.addHandler(new GetNotificationsRequestHandler(this->logger));
-    server.addHandler(new ServeHistoryRequestHandler(this->logger));
-    server.addHandler(new SetNotificationRequestHandler(this->app_notification_mapper,this->app_notifications, this->logger, this->app_config));
-    server.addHandler(new SetLimitsRequestHandler(this->app_limit_mapper, this->app_limits, this->logger));
-    server.addHandler(new SaveFeatureRequestHandler(this->app_feature_mapper, this->logger, this->rtc, this->action_feature, this->app_config, this->app_control));
-    server.addHandler(new GetLogsRequestHandler(this->app_config, this->logger));
-    server.addHandler(new SetFeatureRequestHandler(this->action_feature, this->app_control, this->app_control_mapper, this->app_feature_mapper,this->logger, this->rtc));
+  server.addHandler(new ServeAppMainRequestHandler(this->logger));
+
+  server.addHandler(new CreateUserRequestHandler(this->logger));
+  server.addHandler(new LoginRequestHandler(this->app_jwt, this->rtc, this->logger));
+  server.addHandler(new SetupAccountRequestHandler(this->app_jwt, this->rtc, this->logger, this->app_config, this->app_config_mapper, this->app_ui_mapper));
+  server.addHandler(new ServeIndexRequestHandler(this->logger));
+  server.addHandler(new ServeSetupAccountRequestHandler(this->logger));
+  server.addHandler(new ServeAboutRequestHandler(this->logger));
+  server.addHandler(new ServeLoginRequestHandler(this->logger));
+  server.addHandler(new ServePrivacyRequestHandler(this->logger));
+  server.addHandler(new ServeUpdateRequestHandler(this->logger));
+  server.addHandler(new ServeControlRequestHandler(this->logger));
+  server.addHandler(new ServePrivacyRequestHandler(this->logger));
+  server.addHandler(new ServeTocRequestHandler(this->logger));
+  server.addHandler(new ServeControlRequestHandler(this->logger));
+  server.addHandler(new ServeDashboardRequestHandler(this->logger));
+  server.addHandler(new GetFansRequestHandler(this->logger));
+  server.addHandler(new GetHydroRequestHandler(this->logger));
+  server.addHandler(new GetLightsRequestHandler(this->logger));
+  server.addHandler(new ServeTelegramNoticifationsRequestHandler(this->logger));
+  server.addHandler(new ServeSettingsRequestHandler(this->logger));
+  server.addHandler(new ServeTemperatureRequestHandler(this->logger));
+  server.addHandler(new ServeUpdateRequestHandler(this->logger));
+  server.addHandler(new ServeCredentialsAppliedRequestHandler(this->logger));
+  server.addHandler(new RestartDeviceSettingsRequestHandler(this->logger, this->app_config));
+  server.addHandler(new DownloadFeatureRequestHandler(this->logger));
+  server.addHandler(new ShutDownDeviceSettingsRequestHandler(this->logger));
+  server.addHandler(new RestartDeviceStateRequestHandler(this->logger, this->app_control, this->app_config, this->app_config_mapper));
+  server.addHandler(new RestartCredentialsSettingsRequestHandler(this->app_config, this->app_config_mapper, this->logger));
+  server.addHandler(new ServeFeatureRequestHandler(this->app_config, this->app_control, this->app_feature_mapper, this->logger, this->action_feature));
+  server.addHandler(new GetControlDataRequestHandler(this->app_control, this->app_control_mapper, this->logger));
+  server.addHandler(new SetControlDataRequestHandler(fs, this->app_config, this->app_control, this->app_control_mapper, this->logger, this->rtc));
+  server.addHandler(new ServeLogsRequestHandler(this->logger));
+  server.addHandler(new GetLimitsRequestHandler(this->logger));
+  server.addHandler(new ServeChangeSuccessRequestHandler(this->logger));
+  server.addHandler(new ServeWaterTankRequestHandler(this->logger));
+  server.addHandler(new GetNotificationsRequestHandler(this->logger));
+  server.addHandler(new ServeHistoryRequestHandler(this->logger));
+  server.addHandler(new SetNotificationRequestHandler(this->app_notification_mapper, this->app_notifications, this->logger, this->app_config));
+  server.addHandler(new SetLimitsRequestHandler(this->app_limit_mapper, this->app_limits, this->logger));
+  server.addHandler(new SaveFeatureRequestHandler(this->app_feature_mapper, this->logger, this->rtc, this->action_feature, this->app_config, this->app_control));
+  server.addHandler(new GetLogsRequestHandler(this->app_config, this->logger));
+  server.addHandler(new SetFeatureRequestHandler(this->action_feature, this->app_control, this->app_control_mapper, this->app_feature_mapper, this->logger, this->rtc));
 
   // Remove in production!!!
-  DefaultHeaders::Instance().addHeader("Access-Control-Allow-Origin", "*");
-  DefaultHeaders::Instance().addHeader("Access-Control-Allow-Headers", "Content-Type");
+ // DefaultHeaders::Instance().addHeader("Access-Control-Allow-Origin", "*");
+ // DefaultHeaders::Instance().addHeader("Access-Control-Allow-Headers", "Content-Type");
   // DefaultHeaders::Instance().addHeader("Access-Control-Allow-Headers", "authorization");
-  DefaultHeaders::Instance().addHeader("Access-Control-Allow-Headers", "access-control-allow-origin");
+ // DefaultHeaders::Instance().addHeader("Access-Control-Allow-Headers", "access-control-allow-origin");
   //DefaultHeaders::Instance().addHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
 
   server.begin();

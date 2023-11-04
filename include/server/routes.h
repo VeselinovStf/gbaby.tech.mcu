@@ -46,6 +46,7 @@ class Routes{
         static const char *SERVE_SETUP_ACCOUNT_ROUTE;
         static const char *IDENTITY_AUTH_ROUTE;
         static const char *CREATE_USER_ROUTE;
+        static const char *SERVE_APP_MAIN_ROUTE;
 };
 
 #endif

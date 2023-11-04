@@ -1,3 +1,5 @@
+#pragma region INCLUDES
+
 #include <Arduino.h>
 #include "server/core/web_app_server.h"
 #include <SD.h>
@@ -34,6 +36,8 @@
 #include <CustomJWT.h>
 #include <Crypto.h>
 #include <SHA512.h>
+
+#pragma endregion INCLUDES
 
 #define MODE LogType::DEBUG_LEVEL
 #define SHA512_HASH_LEN 64
@@ -380,18 +384,19 @@ void setup()
 #pragma region SD_CARD_SETUP
 
   // Set SD Flash Storage
-  while (!SD.begin(SD_SS_PIN))
-  {
-    if (MODE == LogType::DEBUG_LEVEL)
+  //while (!SD.begin(SD_SS_PIN, SPI, 4000000, "/sd", 20))
+    while (!SD.begin(SD_SS_PIN,SPI))
     {
-      /*
-        Only in DEBUG log can be seen!
-        Only when SD Flash is ready then the logger
-        can be used
-      */
-      Serial.println("[MAIN]:[INF]: SD: Memory Initialization.....");
+      if (MODE == LogType::DEBUG_LEVEL)
+      {
+        /*
+          Only in DEBUG log can be seen!
+          Only when SD Flash is ready then the logger
+          can be used
+        */
+        Serial.println("[MAIN]:[INF]: SD: Memory Initialization.....");
+      }
     }
-  }
 
 #pragma endregion SD_CARD_SETUP
   // TODO: #120 Check if SPIFFS is used in ESP Architecture
@@ -407,6 +412,42 @@ void setup()
   //     Serial.println("[MAIN]:[INF]: SPIFFS: Memory Initialization.....");
   //   }
   // }
+
+    // File file = SD.open("/data/ui/main.js", FILE_READ, false);
+    // if (!file)
+    // {
+    //   Serial.println("[AppControl]:[ERR]: Failed to create file");
+    //   return;
+    // }
+
+    // if (file)
+    // {
+    //   // Create a buffer to store the data
+    //   const size_t bufferSize = 1024; // Adjust the buffer size as needed
+    //   uint8_t buffer[bufferSize];
+
+    //   while (file.available())
+    //   {
+    //     // Read data into the buffer
+    //     size_t bytesRead = file.read(buffer, bufferSize);
+
+    //     // Process the data in the buffer
+    //     // (e.g., you can send it over a network, save it to SPIFFS, etc.)
+
+    //     // In this example, we'll just print the data to the Serial monitor
+    //     Serial.write(buffer, bytesRead);
+    //   }
+
+    //   // Close the file when done
+    //   file.close();
+    // }
+    // else
+    // {
+    //   Serial.println("Failed to open the file");
+    // }
+
+    // return;
+
 
 #pragma region APP_LOGGER_SETUP
 

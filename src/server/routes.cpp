@@ -43,3 +43,4 @@ const char *Routes::SERVE_LOGIN_ROUTE = "/login";
 const char *Routes::SERVE_SETUP_ACCOUNT_ROUTE = "/setup-account";
 const char *Routes::IDENTITY_AUTH_ROUTE = "/api/auth";
 const char *Routes::CREATE_USER_ROUTE = "/api/create-user";
+const char *Routes::SERVE_APP_MAIN_ROUTE = "/main.js";
