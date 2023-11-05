@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunklab_ui_v02=self.webpackChunklab_ui_v02||[]).push([["styles-31500eb7"],{1481:()=>{}}]);
