@@ -1,1 +1,1 @@
-"use strict";(self.webpackChunklab_ui_v02=self.webpackChunklab_ui_v02||[]).push([["styles-4c120c8f"],{1481:()=>{}}]);
+"use strict";(self.webpackChunklab_ui_v02=self.webpackChunklab_ui_v02||[]).push([[661],{1481:()=>{}}]);
