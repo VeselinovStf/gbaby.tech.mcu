@@ -210,12 +210,7 @@ void WebAppServer::begin(fs::FS &fs)
 
 #pragma region STATIC_RESOURCES
 
-  server.serveStatic("index.html", SD, "/data/ui/index.html").setDefaultFile("index.html");
-  // server.serveStatic("style.css", SD, "/data/ui/style.css").setCacheControl("max-age=125000");
-  // server.serveStatic("scripts.js", SD, "/data/ui/scripts.js").setCacheControl("max-age=125000");
-  // server.serveStatic("runtime.js", SD, "/data/ui/runtime.js").setCacheControl("max-age=125000");
-  // server.serveStatic("polyfills.js", SD, "/data/ui/polyfills.js").setCacheControl("max-age=125000");
- // server.serveStatic("main.js", SD, "/data/ui/main.js").setCacheControl("max-age=125000");
+  server.serveStatic("/", SD, "/data/ui/").setDefaultFile("index.html");
 
 #pragma endregion STATIC_RESOURCES
 
@@ -248,7 +243,7 @@ void WebAppServer::begin(fs::FS &fs)
         });
   }
 
-  server.addHandler(new ServeAppMainRequestHandler(this->logger));
+  //server.addHandler(new ServeAppMainRequestHandler(this->logger));
 
   server.addHandler(new CreateUserRequestHandler(this->logger));
   server.addHandler(new LoginRequestHandler(this->app_jwt, this->rtc, this->logger));
