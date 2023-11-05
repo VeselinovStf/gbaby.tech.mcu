@@ -146,13 +146,13 @@ void WebAppServer::begin(fs::FS &fs)
     IPAddress staGateway;
     IPAddress staSubnet;
 
-    staIpAddress.fromString(this->app_config->STA_IP);
-    staGateway.fromString(this->app_config->STA_GETEWAY);
-    staSubnet.fromString(this->app_config->STA_SUBNETMASK);
+    // staIpAddress.fromString(this->app_config->STA_IP);
+    // staGateway.fromString(this->app_config->STA_GETEWAY);
+    // staSubnet.fromString(this->app_config->STA_SUBNETMASK);
 
     WiFi.mode(WIFI_STA);
 
-    WiFi.config(staIpAddress, staGateway, staSubnet);
+    // WiFi.config(staIpAddress, staGateway, staSubnet);
 
     WiFi.begin(this->app_config->INPUT_SSID.c_str(), this->app_config->INPUT_PASSWORD.c_str());
     
@@ -210,7 +210,7 @@ void WebAppServer::begin(fs::FS &fs)
 
 #pragma region STATIC_RESOURCES
 
-  server.serveStatic("/", SD, "/data/ui/").setDefaultFile("index.html");
+  // server.serveStatic("/", SD, "/data/ui/").setDefaultFile("index.html");
 
 #pragma endregion STATIC_RESOURCES
 
@@ -288,11 +288,11 @@ void WebAppServer::begin(fs::FS &fs)
   server.addHandler(new SetFeatureRequestHandler(this->action_feature, this->app_control, this->app_control_mapper, this->app_feature_mapper, this->logger, this->rtc));
 
   // Remove in production!!!
- // DefaultHeaders::Instance().addHeader("Access-Control-Allow-Origin", "*");
- // DefaultHeaders::Instance().addHeader("Access-Control-Allow-Headers", "Content-Type");
+  DefaultHeaders::Instance().addHeader("Access-Control-Allow-Origin", "*");
+  DefaultHeaders::Instance().addHeader("Access-Control-Allow-Headers", "Content-Type");
   // DefaultHeaders::Instance().addHeader("Access-Control-Allow-Headers", "authorization");
- // DefaultHeaders::Instance().addHeader("Access-Control-Allow-Headers", "access-control-allow-origin");
-  //DefaultHeaders::Instance().addHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+  DefaultHeaders::Instance().addHeader("Access-Control-Allow-Headers", "access-control-allow-origin");
+  // DefaultHeaders::Instance().addHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
 
   server.begin();
 }

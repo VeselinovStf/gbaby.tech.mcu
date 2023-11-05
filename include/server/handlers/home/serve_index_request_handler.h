@@ -29,7 +29,7 @@ public:
     {
         this->logger->log("[Index]:[INFO]: [SERVE] /");
 
-        request->send(SD, "/data/ui/index.html", "text/html");
+        request->send(200, "text/html", "<html><body><h1>Working in Backend Mode!</h1></body></html>");
     }
 
 private:
